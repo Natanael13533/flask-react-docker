@@ -1,0 +1,40 @@
+services:
+  flask-backend:
+    build: ./backend
+    container_name: flask-backend
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/app
+    environment:
+      FLASK_DEBUG: 1
+    command: flask run -h 0.0.0.0
+
+  react-frontend:
+    build: ./frontend
+    container_name: react-frontend
+    ports:
+      - 3000:3000  # Mapping external port 3001 to internal port 80
+    volumes:
+      - ./frontend:/app
+    environment:
+      NODE_ENV: development
+    command: npm start
+
+  db:
+    image: postgres
+    container_name: flask-database
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+volumes:
+  db_data:
