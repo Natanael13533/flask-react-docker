@@ -63,13 +63,14 @@ Berikut cara untuk start Project.
    ```sh
    cd flask-react-docker
    ```
-3. install terlebih dahulu npm pada folder frontend
+3. run docker
+   ```sh
+   docker compose up -d --build
+   ```
+4. (optional) apabila setelah run docker dan node_modules tidak mucncul, maka install terlebih dahulu npm pada folder frontend lalu run docker
    ```sh
    cd frontend
    npm install
-   ```
-4. run docker
-   ```sh
    docker compose up -d --build
    ```
 
